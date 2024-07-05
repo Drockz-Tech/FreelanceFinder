@@ -13,7 +13,13 @@
         android:theme="@style/Theme.FreelanceFinder"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".login"
+            android:exported="true" />
+        <activity
+            android:name=".Home_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".intro"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".registration_activity"
+            android:label="@string/app_name"></activity>
     </application>
 
 </manifest>
