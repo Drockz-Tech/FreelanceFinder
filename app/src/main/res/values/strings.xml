@@ -1,3 +1,14 @@
+<!-- res/values/strings.xml -->
 <resources>
     <string name="app_name">FreelanceFinder</string>
+    <string-array name="categories_array">
+        <item>Web Development</item>
+        <item>Design</item>
+        <item>Writing</item>
+        <item>Marketing</item>
+        <item>Photography</item>
+        <!-- Add more categories as needed -->
+    </string-array>
+    <string name="image_favorite">image_favorite</string>
+    <string name="logo">company logo</string>
 </resources>
