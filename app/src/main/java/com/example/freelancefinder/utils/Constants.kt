@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
 object Constants {
-    const val BASE_URL = "https://remotive.io/api/"
+    const val BASE_URL = "https://remotive.com/api/remote-jobs"
     /**
      * This function is used check if the device is connected to the Internet or not.
      */

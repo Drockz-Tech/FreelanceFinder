@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.freelancefinder.MainActivity
 import com.example.freelancefinder.R
+import com.example.freelancefinder.adapters.RemoteJobAdapter
 import com.example.freelancefinder.databinding.FragmentSearchJobBinding
 import com.example.freelancefinder.utils.Constants
+import com.example.freelancefinder.viewmodel.RemoteJobViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -22,6 +24,8 @@ class SearchJobFragment : Fragment(R.layout.fragment_search_job) {
 
     private var _binding: FragmentSearchJobBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: RemoteJobViewModel
+    private lateinit var jobAdapter: RemoteJobAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +42,7 @@ class SearchJobFragment : Fragment(R.layout.fragment_search_job) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = (activity as MainActivity).viewModel
 
         if (Constants.isNetworkAvailable(requireContext())) {
             searchJob()
@@ -51,15 +56,28 @@ class SearchJobFragment : Fragment(R.layout.fragment_search_job) {
         var job: Job? = null
         binding.etSearch.addTextChangedListener { editable ->
             job?.cancel()
+            job = MainScope().launch {
+                delay(500L)
+                editable?.let {
+                    if (editable.toString().isNotEmpty()) {
+                        viewModel.searchJob(editable.toString())
+                    }
+                }
+            }
         }
         setUpRecyclerView()
     }
 
 
     private fun setUpRecyclerView() {
+        jobAdapter = RemoteJobAdapter()
         binding.rvSearchJobs.apply {
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
+            adapter = jobAdapter
+        }
+        viewModel.searchResult().observe(viewLifecycleOwner) { remoteJob ->
+            jobAdapter.differ.submitList(remoteJob.jobs)
         }
     }
 

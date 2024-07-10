@@ -14,15 +14,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.freelancefinder.MainActivity
 import com.example.freelancefinder.R
+import com.example.freelancefinder.adapters.RemoteJobSavedAdapter
 import com.example.freelancefinder.databinding.FragmentSavedJobsBinding
 import com.example.freelancefinder.models.JobToSave
+import com.example.freelancefinder.viewmodel.RemoteJobViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
-class SavedJobsFragment : Fragment(R.layout.fragment_saved_jobs) {
+class SavedJobsFragment : Fragment(R.layout.fragment_saved_jobs),
+    RemoteJobSavedAdapter.OnItemClickListener{
 
     private var _binding: FragmentSavedJobsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: RemoteJobViewModel
+    private lateinit var jobAdapter: RemoteJobSavedAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +45,12 @@ class SavedJobsFragment : Fragment(R.layout.fragment_saved_jobs) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = (activity as MainActivity).viewModel
         setUpRecyclerView()
     }
 
     private fun setUpRecyclerView() {
+        jobAdapter = RemoteJobSavedAdapter(this)
 
         binding.rvJobsSaved.apply {
 
@@ -52,7 +59,12 @@ class SavedJobsFragment : Fragment(R.layout.fragment_saved_jobs) {
             addItemDecoration(
                 object : DividerItemDecoration(
                     activity, LinearLayout.VERTICAL) {})
+            adapter = jobAdapter
+        }
 
+        viewModel.getAllJob().observe(viewLifecycleOwner) { jobToSave: List<JobToSave> ->
+            jobAdapter.differ.submitList(jobToSave)
+            updateUI(jobToSave)
         }
 
     }
@@ -68,7 +80,7 @@ class SavedJobsFragment : Fragment(R.layout.fragment_saved_jobs) {
         }
     }
 
-    fun onItemClick(job: JobToSave, view: View, position: Int) {
+    override fun onItemClick(job: JobToSave, view: View, position: Int) {
        deleteJob(job)
     }
 
@@ -78,11 +90,11 @@ class SavedJobsFragment : Fragment(R.layout.fragment_saved_jobs) {
             setTitle("Delete Job")
             setMessage("Are you sure you want to permanently delete this job?")
             setPositiveButton("DELETE") { _, _ ->
-               Toast.makeText(activity,"Job deleted", Toast.LENGTH_SHORT).show()
+                viewModel.deleteJob(job)
+                Toast.makeText(activity,"Job deleted", Toast.LENGTH_SHORT).show()
             }
             setNegativeButton("CANCEL", null)
         }.create().show()
-
     }
 
     override fun onDestroy() {

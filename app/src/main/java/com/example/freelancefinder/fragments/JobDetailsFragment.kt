@@ -13,6 +13,7 @@ import com.example.freelancefinder.R
 import com.example.freelancefinder.databinding.FragmentJobDetailsBinding
 import com.example.freelancefinder.models.Job
 import com.example.freelancefinder.models.JobToSave
+import com.example.freelancefinder.viewmodel.RemoteJobViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -20,7 +21,9 @@ class JobDetailsFragment : Fragment(R.layout.fragment_job_details) {
 
     private var _binding: FragmentJobDetailsBinding? = null
     private val binding get() = _binding!!
+    private val args: JobDetailsFragmentArgs by navArgs()
     private lateinit var currentJob: Job
+    private lateinit var viewModel: RemoteJobViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +42,9 @@ class JobDetailsFragment : Fragment(R.layout.fragment_job_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = (activity as MainActivity).viewModel
+        currentJob = args.job!!
 
         setUpWebView()
 
@@ -63,6 +69,7 @@ class JobDetailsFragment : Fragment(R.layout.fragment_job_details) {
             textZoom = 100
             blockNetworkImage = false
             loadsImagesAutomatically = true
+            domStorageEnabled = true
         }
     }
 
@@ -74,6 +81,9 @@ class JobDetailsFragment : Fragment(R.layout.fragment_job_details) {
             currentJob.description, currentJob.id, currentJob.jobType,
             currentJob.publicationDate, currentJob.salary, currentJob.title, currentJob.url
         )
+
+        viewModel.insertJob(job)
+        Snackbar.make(view, "Job saved successfully", Snackbar.LENGTH_SHORT).show()
 
     }
 
