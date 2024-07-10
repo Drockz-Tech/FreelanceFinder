@@ -1,10 +1,9 @@
-package com.example.freelancefinder
+package com.example.freelancefinder.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.freelancefinder.models.Job
 import com.example.freelancefinder.models.JobToSave
 
 @Database(entities = [JobToSave::class], version = 1)

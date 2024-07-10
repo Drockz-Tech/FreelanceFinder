@@ -1,4 +1,4 @@
-package com.example.freelancefinder
+package com.example.freelancefinder.db
 
 
 import androidx.lifecycle.LiveData
