@@ -9,7 +9,7 @@ class RemoteJobViewModelFactory(
     val app: Application,
     private val remoteJobRepository: RemoteJobRepository
 ) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return RemoteJobViewModel(app, remoteJobRepository) as T
     }
 }

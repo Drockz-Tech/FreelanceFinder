@@ -85,12 +85,12 @@ class RemoteJobsFragment : Fragment(R.layout.fragment_remote_jobs),
             if (Constants.isNetworkAvailable(requireActivity())) {
 
                 remoteJobViewModel.remoteJobResult()
-                    .observe(viewLifecycleOwner, { remoteJob ->
+                    .observe(viewLifecycleOwner) { remoteJob ->
                         if (remoteJob != null) {
                             jobAdapter.differ.submitList(remoteJob.jobs)
                             swipeLayout.isRefreshing = false
                         }
-                    })
+                    }
             } else {
                 Toast.makeText(activity, "No internet connection", Toast.LENGTH_SHORT).show()
                 swipeLayout.isRefreshing = false
