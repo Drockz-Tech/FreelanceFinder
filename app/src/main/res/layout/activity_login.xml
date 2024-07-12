@@ -15,7 +15,6 @@
 
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/password"
         android:drawablePadding="16dp"
         android:ems="10"
         android:hint="Password"
@@ -34,8 +33,7 @@
         android:layout_height="231dp"
         android:layout_marginStart="-20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/circle_top" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
@@ -58,9 +56,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/email"
         android:drawablePadding="16dp"
-
         android:ems="10"
         android:hint="Email"
         android:inputType="text"
@@ -110,7 +106,6 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="0.5"
             android:background="@drawable/no_background_btn"
-            android:drawableEnd="@drawable/facebook"
             android:drawablePadding="16dp"
             android:fontFamily="sans-serif"
             android:lineSpacingMultiplier="1"
@@ -121,7 +116,8 @@
             android:textColorHint="#ffffff"
             android:textColorLink="#ffffff"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
+<!--            android:drawableEnd="@drawable/facebook"/>-->
 
         <Button
             android:id="@+id/button3"
@@ -132,7 +128,6 @@
             android:layout_marginEnd="32dp"
             android:layout_weight="1"
             android:background="@drawable/no_background_btn"
-            android:drawableEnd="@drawable/google"
             android:drawablePadding="16dp"
             android:fontFamily="sans-serif"
             android:lineSpacingMultiplier="1"
@@ -143,7 +138,8 @@
             android:textColorHint="#ffffff"
             android:textColorLink="#ffffff"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
+<!--            android:drawableEnd="@drawable/google"/>-->
 
     </LinearLayout>
 
@@ -208,7 +204,6 @@
         android:layout_marginBottom="-30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:srcCompat="@drawable/circle_bottom" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
