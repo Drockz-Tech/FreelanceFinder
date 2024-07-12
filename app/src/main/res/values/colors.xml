@@ -5,5 +5,6 @@
     <color name="colorAccent">#1D1D40</color>
     <color name="background">#B3B7B6</color>
     <color name="black">#FF000000</color>
+    <color name="pls">#222252</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
