@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -64,6 +65,9 @@ dependencies {
     implementation ("androidx.room:room-runtime:2.6.1")
     ksp ("androidx.room:room-compiler:2.6.1")
     implementation ("androidx.room:room-ktx:2.6.1")
+    implementation("com.google.firebase:firebase-auth:23.0.0")
+    implementation("androidx.activity:activity:1.9.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation ("androidx.paging:paging-runtime-ktx:3.0.0-beta01")
     testImplementation("junit:junit:4.13.2")

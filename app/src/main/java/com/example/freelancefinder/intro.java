@@ -75,7 +75,7 @@ public class intro extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), Home_Activity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             mDialog.dismiss();
                         }
                         else {
